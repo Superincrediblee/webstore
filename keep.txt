@@ -1,0 +1,218 @@
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
+  const [value, setValue] = useState(dayjs('2022-04-17'));
+    const handleDateChange = (type, newValue) => {
+    if (type === 'start') {
+      setStartDate(newValue);
+    } else if (type === 'end') {
+      setEndDate(newValue);
+    }
+  };
+  const filteredData = transactionData?.filter((item) => {
+    const transactionDate = dayjs(item.date); // Assuming 'date' property exists in the transaction object
+    return transactionDate.isBetween(startDate, endDate, 'day', '[]'); // Filter within inclusive date range
+  });
+        <Stack direction="row">
+        <Button
+          variant="outlined"
+          sx={{
+            borderRadius: '20px',
+            bgcolor: 'white',
+            color: 'black',
+            width: '90px',
+            height: '40px',
+            fontSize: '12px',
+            textTransform: 'none',
+            mr: 1.5,
+          }}
+        >
+          Today
+        </Button>
+        <Button
+          variant="outlined"
+          sx={{
+            borderRadius: '20px',
+            bgcolor: 'white',
+            color: 'black',
+            width: '90px',
+            height: '40px',
+            fontSize: '12px',
+            whiteSpace: 'nowrap',
+            textTransform: 'none',
+            mr: 1.5,
+          }}
+        >
+          Last 7 days
+        </Button>
+        <Button
+          variant="outlined"
+          sx={{
+            borderRadius: '20px',
+            bgcolor: 'white',
+            color: 'black',
+            width: '90px',
+            height: '40px',
+            fontSize: '12px',
+            whiteSpace: 'nowrap',
+            textTransform: 'none',
+            mr: 1.5,
+          }}
+        >
+          This month
+        </Button>
+        <Button
+          variant="outlined"
+          sx={{
+            borderRadius: '20px',
+            bgcolor: 'white',
+            color: 'black',
+            width: '90px',
+            height: '40px',
+            fontSize: '12px',
+            textTransform: 'none',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          Last 3 month
+        </Button>
+      </Stack>
+      <Box>
+        <Typography variant="h6" sx={{ fontWeight: 600, mt: 2 }}>
+          Date Range
+        </Typography>
+        <Stack direction="row">
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DemoContainer
+              components={[
+                'DatePicker',
+                'DatePicker',
+                /* 'DesktopDatePicker', */
+                /* 'MobileDatePicker', */
+              ]}
+            >
+              <DatePicker
+                label="Uncontrolled picker"
+                defaultValue={dayjs('2022-04-17')}
+                maxDate={dayjs('2022-04-17')}
+              />
+              <DatePicker
+                label="Controlled picker"
+                value={value}
+                onChange={(newValue) => setValue(newValue)}
+              />
+            </DemoContainer>
+          </LocalizationProvider>
+        </Stack>
+
+                {/*     <List>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar sx={{ bgcolor: 'lightgreen', color: 'green' }}>
+                <CallReceivedIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary="Pyschology of Money" secondary="Roy Cash" />
+          </ListItem>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar sx={{ bgcolor: 'lightgreen', color: 'green' }}>
+                <CallReceivedIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText
+              primary="Buy me a coffee"
+              secondary="jonathan smart"
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar sx={{ bgcolor: 'lightgreen', color: 'green' }}>
+                <CallReceivedIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText
+              primary="How to build an online brand"
+              secondary="Delvan Ludacris"
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar sx={{ bgcolor: 'red', color: 'red' }}>
+                <CallMadeIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText
+              primary="Cash withdrawal"
+              secondary="Successful"
+              secondaryTypographyProps={{ color: 'green' }}
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar sx={{ bgcolor: 'lightgreen', color: 'green' }}>
+                <CallReceivedIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText
+              primary="Support my outreach"
+              secondary="Shawn Kane"
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar sx={{ bgcolor: 'red', color: 'red' }}>
+                <CallMadeIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText
+              primary="cash withdrawal"
+              secondary="Pending"
+              secondaryTypographyProps={{ color: 'brown' }}
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar sx={{ bgcolor: 'lightgreen', color: 'green' }}>
+                <CallReceivedIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText
+              primary="Learn how to pitch your idea"
+              secondary="Dujon Jericho"
+            />
+          </ListItem>
+        </List> */}
+
+          const handleDateChange = (dateType, newValue) => {
+    let newFromDate = selectedDateRange.from;
+    let newToDate = selectedDateRange.to;
+
+    if (dateType === 'from' && newValue.isAfter(selectedDateRange.to)) {
+      // If from date is after the current to date, set to date to from date
+      newToDate = newValue;
+    } else if (dateType === 'to' && newValue.isBefore(selectedDateRange.from)) {
+      // If to date is before the current from date, set from date to to date
+      newFromDate = newValue;
+    } else {
+      // Otherwise, update the selected date range as usual
+      if (dateType === 'from') {
+        newFromDate = newValue;
+      } else {
+        newToDate = newValue;
+      }
+    }
+
+    setSelectedDateRange({
+      from: newFromDate.startOf('day'),
+      to: newToDate.startOf('day'),
+    });
+  };
+    /*   const handleDateChange = (dateType, newValue) => {
+    setSelectedDateRange((prevRange) => ({
+      ...prevRange,
+      [dateType]: newValue.startOf('day'),
+    }));
+  }; */
